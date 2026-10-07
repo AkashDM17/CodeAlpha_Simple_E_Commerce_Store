@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart - ShopEasy</title>
+  <meta name="description" content="View items in your cart, adjust quantities, and proceed to secure checkout.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        </div>
+        <span>ShopEasy</span>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="nav-search">
+        <form id="nav-search-form">
+          <svg class="nav-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="nav-search-input" placeholder="Search products..." aria-label="Search">
+        </form>
+      </div>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links" id="nav-links">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item"><a href="products.html">Products</a></li>
+        <li class="nav-item">
+          <a href="cart.html" class="cart-link active">
+            <span>Cart</span>
+            <span class="cart-badge">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Auth Action Container -->
+      <div class="nav-auth" id="nav-auth-container">
+        <a href="login.html" class="btn btn-sm btn-secondary">Login</a>
+        <a href="register.html" class="btn btn-sm btn-primary">Register</a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Open navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <div style="background: white; border-bottom: 1px solid var(--border); padding: 2rem 0;">
+    <div class="container">
+      <div class="breadcrumbs" style="margin: 0 0 0.5rem 0;">
+        <a href="index.html">Home</a> &gt; <span>Shopping Cart</span>
+      </div>
+      <h1 style="font-size: 2rem; font-weight: 800;">Your Shopping Cart</h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Review selected items, update quantities, and finalize order checkout.</p>
+    </div>
+  </div>
+
+  <!-- Main Cart Section -->
+  <main class="section">
+    <div class="container" id="cart-content-wrapper">
+      <!-- Dynamic Cart Layout Injected via cart.js -->
+    </div>
+  </main>
+
+  <!-- Checkout Modal Dialog -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Shipping & Order Checkout</h3>
+        <button class="modal-close-btn" id="close-checkout-modal" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <div style="margin-bottom: 1.5rem; background: var(--bg-surface); border-radius: var(--radius-md); padding: 1rem 1.25rem;">
+        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.95rem;">
+          <span>Order Total:</span>
+          <span id="checkout-modal-total" style="color: var(--primary); font-size: 1.15rem;">$0.00</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;" id="checkout-items-summary"></p>
+      </div>
+
+      <form id="checkout-form">
+        <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main);">Shipping Address</h4>
+
+        <div class="form-group">
+          <label class="form-label" for="ship-name">Full Name *</label>
+          <input type="text" id="ship-name" class="form-control" placeholder="e.g. John Doe" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="ship-phone">Phone Number *</label>
+          <input type="tel" id="ship-phone" class="form-control" placeholder="e.g. +1 555-0199 or 9876543210" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="ship-address">Street Address *</label>
+          <input type="text" id="ship-address" class="form-control" placeholder="House/Flat No., Street, Area" required>
+        </div>
+
+        <div class="checkout-grid">
+          <div class="form-group">
+            <label class="form-label" for="ship-city">City *</label>
+            <input type="text" id="ship-city" class="form-control" placeholder="e.g. San Francisco" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ship-state">State / Province *</label>
+            <input type="text" id="ship-state" class="form-control" placeholder="e.g. California" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="ship-pin">PIN / Postal Code *</label>
+          <input type="text" id="ship-pin" class="form-control" placeholder="e.g. 94105 or 560001" required>
+        </div>
+
+        <h4 style="font-size: 1rem; font-weight: 700; margin: 1.25rem 0 0.75rem; color: var(--text-main);">Payment Method</h4>
+        <div class="form-group">
+          <select id="checkout-payment-method" class="form-control" style="cursor: pointer;">
+            <option value="Cash on Delivery (Simulated)">Cash on Delivery (Pay upon delivery)</option>
+            <option value="Credit / Debit Card (Simulated)">Credit / Debit Card (Simulated Payment)</option>
+            <option value="UPI / Net Banking (Simulated)">UPI / Net Banking (Simulated Payment)</option>
+          </select>
+          <small style="display: block; margin-top: 0.35rem; color: var(--text-muted);">
+            Note: This is a demo simulated payment for CodeAlpha project evaluation. No real money is charged.
+          </small>
+        </div>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: flex-end;">
+          <button type="button" class="btn btn-secondary" id="cancel-checkout-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="place-order-btn">
+            Confirm & Place Order
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Confirmation Modal -->
+  <div class="modal-overlay" id="confirmation-modal">
+    <div class="modal-content" style="text-align: center; max-width: 500px;">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
+      <h2 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main);">Order Placed Successfully!</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+        Thank you for your order. We are preparing it for shipment.
+      </p>
+
+      <div style="background: var(--bg-surface); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.75rem; text-align: left;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+          <span style="color: var(--text-muted);">Order ID:</span>
+          <strong id="confirm-order-id" style="color: var(--primary);">ORD-00000</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+          <span style="color: var(--text-muted);">Total Amount:</span>
+          <strong id="confirm-order-total">$0.00</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+          <span style="color: var(--text-muted);">Status:</span>
+          <span class="order-status-badge status-processing" id="confirm-order-status">Processing</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <a href="orders.html" class="btn btn-primary">View My Orders</a>
+        <a href="products.html" class="btn btn-secondary">Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span>ShopEasy</span>
+        </div>
+        <p class="footer-desc">Your trusted destination for lifestyle, tech, and everyday essentials.</p>
+      </div>
+      <div>
+        <h4 class="footer-title">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="cart.html">Shopping Cart</a></li>
+          <li><a href="orders.html">Orders</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Quick Help</h4>
+        <ul class="footer-links">
+          <li><a href="#">Shipping Rates</a></li>
+          <li><a href="#">Payment Protection</a></li>
+          <li><a href="#">Track Order</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Account</h4>
+        <ul class="footer-links">
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="orders.html">My Orders</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 ShopEasy Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

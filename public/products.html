@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Products - ShopEasy</title>
+  <meta name="description" content="Explore our complete catalog of electronics, clothing, footwear, accessories, and home goods with filters and instant search.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        </div>
+        <span>ShopEasy</span>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="nav-search">
+        <form id="nav-search-form">
+          <svg class="nav-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="nav-search-input" placeholder="Search catalog..." aria-label="Search">
+        </form>
+      </div>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links" id="nav-links">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item"><a href="products.html" class="active">Products</a></li>
+        <li class="nav-item">
+          <a href="cart.html" class="cart-link">
+            <span>Cart</span>
+            <span class="cart-badge">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Auth Action Container -->
+      <div class="nav-auth" id="nav-auth-container">
+        <a href="login.html" class="btn btn-sm btn-secondary">Login</a>
+        <a href="register.html" class="btn btn-sm btn-primary">Register</a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Open navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <div style="background: white; border-bottom: 1px solid var(--border); padding: 2rem 0;">
+    <div class="container">
+      <div class="breadcrumbs" style="margin: 0 0 0.5rem 0;">
+        <a href="index.html">Home</a> &gt; <span>Products</span>
+      </div>
+      <h1 style="font-size: 2rem; font-weight: 800;">Product Catalog</h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Browse all available items, filter by department or search specifically.</p>
+    </div>
+  </div>
+
+  <!-- Catalog Section -->
+  <main class="section">
+    <div class="container catalog-layout">
+      <!-- Sidebar Filters -->
+      <aside class="filter-sidebar">
+        <div class="filter-section">
+          <h3 class="filter-title">Categories</h3>
+          <ul class="filter-list" id="category-filter-list">
+            <li><button class="filter-btn active" data-category="All">All Categories</button></li>
+            <li><button class="filter-btn" data-category="Electronics">Electronics</button></li>
+            <li><button class="filter-btn" data-category="Clothing">Clothing</button></li>
+            <li><button class="filter-btn" data-category="Shoes">Shoes</button></li>
+            <li><button class="filter-btn" data-category="Accessories">Accessories</button></li>
+            <li><button class="filter-btn" data-category="Home & Kitchen">Home & Kitchen</button></li>
+          </ul>
+        </div>
+
+        <div class="filter-section">
+          <h3 class="filter-title">Filter by Availability</h3>
+          <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; cursor: pointer; color: var(--text-muted);">
+            <input type="checkbox" id="in-stock-only">
+            <span>In Stock Only</span>
+          </label>
+        </div>
+
+        <div class="filter-section">
+          <button class="btn btn-sm btn-secondary btn-full" id="reset-filters-btn">
+            Reset All Filters
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Catalog Display -->
+      <div>
+        <!-- Top Toolbar -->
+        <div class="catalog-topbar">
+          <div class="catalog-search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="catalog-search-input" placeholder="Search within catalog...">
+          </div>
+
+          <div style="font-size: 0.9rem; color: var(--text-muted);" id="product-count-display">
+            Showing all products
+          </div>
+
+          <div class="catalog-sort">
+            <label for="catalog-sort-select">Sort By:</label>
+            <select id="catalog-sort-select">
+              <option value="newest">Newest First</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+              <option value="name-asc">Alphabetical (A-Z)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Products Grid Container -->
+        <div class="products-grid" id="catalog-products-grid">
+          <div class="empty-state" style="grid-column: 1 / -1;">
+            <p>Loading products...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span>ShopEasy</span>
+        </div>
+        <p class="footer-desc">Your trusted destination for lifestyle, tech, and everyday essentials. CodeAlpha Project.</p>
+      </div>
+      <div>
+        <h4 class="footer-title">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="cart.html">Cart</a></li>
+          <li><a href="orders.html">Orders</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Categories</h4>
+        <ul class="footer-links">
+          <li><a href="products.html?category=Electronics">Electronics</a></li>
+          <li><a href="products.html?category=Clothing">Clothing</a></li>
+          <li><a href="products.html?category=Shoes">Footwear</a></li>
+          <li><a href="products.html?category=Home%20%26%20Kitchen">Home & Kitchen</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Account</h4>
+        <ul class="footer-links">
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="orders.html">My Orders</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 ShopEasy Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>
